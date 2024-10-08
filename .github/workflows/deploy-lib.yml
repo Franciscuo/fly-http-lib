@@ -15,17 +15,30 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+  
     - name: Install nestjs cli
       run: npm i -g @nestjs/cli
+
     - name: Install dependencies
       run: npm install
+
     - name: Run lint
       run: npm run lint
+
     - name: Run tests
       run: npm run test:cov
+
     - name: Run build
       run: npm run build
-    - name: copy package.json
-      run: cp package.json dist/package.json
-    - name: publish to npm
-      run: cd dist && npm publish
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4
+      with:
+        version: 8
+        run_install: true
+
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: pnpm dlx semantic-release
