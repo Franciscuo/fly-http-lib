@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "repository": {
-    "url": "https://github.com/Franciscuo/fly-http-lib.git"
+    "url": "git+https://github.com/Franciscuo/fly-http-lib.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
